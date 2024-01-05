@@ -35,6 +35,19 @@ impl From<FirebaseAuthRestApi> for &'static str {
     }
 }
 
+pub enum FirebaseFcmRestApi {
+    SendMessage, // It's actually "send", but it's a reserved keyword in Rust, so we use
+                 // SendMessage
+}
+
+impl From<FirebaseFcmRestApi> for &'static str {
+    fn from(path: FirebaseFcmRestApi) -> Self {
+        match path {
+            FirebaseFcmRestApi::SendMessage => "/messages:send",
+        }
+    }
+}
+
 /// Firebase Auth emulator admin REST API endpoints
 pub enum FirebaseAuthEmulatorRestApi {
     ClearUserAccounts,

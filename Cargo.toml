@@ -4,5 +4,6 @@ members = [
     "lib",
     "examples/get_users",
     "examples/verify_token",
-    "examples/clear_emulator"
+    "examples/clear_emulator",
+    "examples/send_message"
 ]

@@ -2,6 +2,7 @@ pub mod api_uri;
 pub mod auth;
 pub mod client;
 pub mod credentials;
+pub mod fcm;
 pub mod util;
 
 use auth::{
@@ -16,6 +17,7 @@ use client::{build_https_client, HyperApiClient, HyperClient};
 use credentials::emulator::EmulatorCredentials;
 pub use credentials::{error::CredentialsError, gcp::GcpCredentials};
 use error_stack::{Report, ResultExt};
+use fcm::FirebaseFcm;
 pub use gcp_auth::CustomServiceAccount;
 use http::uri::Authority;
 use std::sync::Arc;
@@ -24,6 +26,8 @@ use std::sync::Arc;
 pub type LiveAuthAdmin = FirebaseAuth<HyperApiClient<GcpCredentials>>;
 /// Default Firebase Auth Emulator admin manager
 pub type EmulatorAuthAdmin = FirebaseAuth<HyperApiClient<EmulatorCredentials>>;
+/// Default Firebase Auth admin manager
+pub type LiveFcmAdmin = FirebaseFcm<HyperApiClient<GcpCredentials>>;
 
 /// Base privileged manager for Firebase
 pub struct App<CredentialsT> {
@@ -78,6 +82,13 @@ impl App<GcpCredentials> {
         let client = HyperApiClient::new(self.credentials.clone());
 
         FirebaseAuth::live(&self.project_id, client)
+    }
+
+    /// Create Firebase FCM manager
+    pub fn fcm(&self) -> LiveFcmAdmin {
+        let client = HyperApiClient::new(self.credentials.clone());
+
+        LiveFcmAdmin::live(&self.project_id, client)
     }
 
     /// Create OIDC token verifier
