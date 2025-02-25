@@ -24,6 +24,7 @@ async fn main() {
                 notification: Notification {
                     title: "test".into(),
                     body: "test".into(),
+                    sound: "default".into(),
                 },
                 token: test_token.into(),
             },

@@ -27,6 +27,7 @@ pub struct Message {
 pub struct Notification {
     pub title: String,
     pub body: String,
+    pub sound: String,
 }
 
 #[derive(Deserialize, Debug, Clone)]
