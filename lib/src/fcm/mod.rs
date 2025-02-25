@@ -19,6 +19,7 @@ pub struct SendMessageRequest {
 #[serde(rename_all = "camelCase")]
 pub struct Message {
     pub notification: Notification,
+    pub apns: Apns,
     pub token: String,
 }
 
@@ -27,6 +28,23 @@ pub struct Message {
 pub struct Notification {
     pub title: String,
     pub body: String,
+}
+
+#[derive(Serialize, Debug, Clone, Default)]
+#[serde(rename_all = "camelCase")]
+pub struct Apns {
+    pub payload: ApnsPayload,
+}
+
+#[derive(Serialize, Debug, Clone, Default)]
+#[serde(rename_all = "camelCase")]
+pub struct ApnsPayload {
+    pub aps: Aps,
+}
+
+#[derive(Serialize, Debug, Clone, Default)]
+#[serde(rename_all = "camelCase")]
+pub struct Aps {
     pub sound: String,
 }
 

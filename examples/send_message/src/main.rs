@@ -1,5 +1,5 @@
 use rs_firebase_admin_sdk::{
-    fcm::{FirebaseFcmService, Message, Notification, SendMessageRequest},
+    fcm::{Apns, FirebaseFcmService, Message, Notification, SendMessageRequest},
     App, CustomServiceAccount,
 };
 
@@ -24,8 +24,8 @@ async fn main() {
                 notification: Notification {
                     title: "test".into(),
                     body: "test".into(),
-                    sound: "default".into(),
                 },
+                apns: Apns::default(),
                 token: test_token.into(),
             },
         })
