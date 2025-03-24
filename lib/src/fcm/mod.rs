@@ -1,3 +1,5 @@
+use std::collections::HashMap;
+
 use async_trait::async_trait;
 use error_stack::{Report, ResultExt};
 use http::uri::Scheme;
@@ -18,6 +20,7 @@ pub struct SendMessageRequest {
 #[derive(Serialize, Debug, Clone, Default)]
 #[serde(rename_all = "camelCase")]
 pub struct Message {
+    pub data: HashMap<String, String>,
     pub notification: Notification,
     pub apns: Apns,
     pub token: String,
